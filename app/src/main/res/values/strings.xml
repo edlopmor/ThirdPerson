@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ThirdPerson</string>
+    <string name="hint_Email">Email</string>
+    <string name="hint_Password">Password</string>
+    <string name="textViewRegistro">Si no tiene cuenta, rellene los campos y clik aqui</string>
+    <string name="buttonSign">Acceder</string>
 </resources>
