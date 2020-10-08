@@ -3,9 +3,9 @@ package com.androidavanzado.thirdperson
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-class HomeActivity : AppCompatActivity() {
+class RetrievePasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_retrieve_password)
     }
 }
