@@ -20,4 +20,10 @@
     <string name="lostPassword"><u> Olvidaste la contraseña</u></string>
     <string name="lblIntroduzcasuEmail">Por favor introduzca su email</string>
     <string name="btnSend">Enviar</string>
+    <string name="btnGoogle">"Acceder con Google"</string>
+    <string name="btnFacebook">"Acceder con Facebook"</string>
+
+    <!-- Variable global para almacenar los datos del usuario-->
+    <string name="prefs_file">com.androidavanzado.thirdperson.PREFERENCE_FILE_KEY</string>
+
 </resources>
