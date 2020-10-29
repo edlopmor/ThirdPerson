@@ -25,5 +25,15 @@
 
     <!-- Variable global para almacenar los datos del usuario-->
     <string name="prefs_file">com.androidavanzado.thirdperson.PREFERENCE_FILE_KEY</string>
+    <string name="txtCanyoning">Barranquismo</string>
+    <string name="nombreActividad">Nombre de la actividad</string>
+    <string name="numerodeparticipantes">Numero de personas</string>
+    <string name="idCar">Matricula coche</string>
+    <string name="contactoEmergencia">Contacto en caso de retraso</string>
+    <string name="starttime">Hora de inicio</string>
+    <string name="finishTime">Hora de finalización</string>
+    <string name="localizacionVehiculo">Localizacion del vehiculo</string>
+    <string name="btnStartActivity">Guardar Actividad</string>
+    <string name="Day">Dia</string>
 
 </resources>

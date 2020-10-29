@@ -1,11 +1,14 @@
 package com.androidavanzado.thirdperson
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+import java.security.Provider
+
 
 enum class ProviderType {
     BASIC,
@@ -13,6 +16,10 @@ enum class ProviderType {
 }
 
 class HomeActivity : AppCompatActivity() {
+    companion object {
+        var email: String = "";
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -33,6 +40,13 @@ class HomeActivity : AppCompatActivity() {
 
         btnCerrarSesion.setOnClickListener {
             cerrarSesion()
+        }
+        buttonGoCanyon.setOnClickListener {
+            val goCanyonIntent : Intent = Intent(this, GoCanyonActivity::class.java).apply {
+                putExtra("email", email)
+
+            }
+            startActivity(goCanyonIntent)
         }
 
     }
