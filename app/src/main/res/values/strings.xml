@@ -35,5 +35,8 @@
     <string name="localizacionVehiculo">Localizacion del vehiculo</string>
     <string name="btnStartActivity">Guardar Actividad</string>
     <string name="Day">Dia</string>
+    <string name="ubicacionVehiculo">"Ubicación del vehiculo "</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="ubicacionvehiculo">Ubicacion del vehiculo en lat long</string>
 
 </resources>

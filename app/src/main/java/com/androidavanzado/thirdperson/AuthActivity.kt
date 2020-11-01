@@ -97,7 +97,7 @@ class AuthActivity : AppCompatActivity() {
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Acceso exitoso", Toast.LENGTH_LONG).show()
-                    showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+                    showHome(it.result?.user?.email ?: "")
 
                 } else {
                     ShowAlert()
@@ -110,11 +110,11 @@ class AuthActivity : AppCompatActivity() {
      * Funcion que navega hasta la pantalla de usuario y envia los datos.
      *
      */
-    private fun showHome(email: String, provider: ProviderType) {
+    private fun showHome(email: String ){
 
         val homeIntent: Intent = Intent(this, HomeActivity::class.java).apply {
             putExtra("email", email)
-            putExtra("provider", provider.name)
+
         }
         startActivity(homeIntent)
     }
@@ -158,11 +158,11 @@ class AuthActivity : AppCompatActivity() {
         val preferencias: SharedPreferences? =
             getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email: String? = preferencias?.getString("email", null)
-        val provider: String? = preferencias?.getString("provider", null)
+        // val provider: String? = preferencias?.getString("provider", null)
 
-        if (email != null && provider != null) {
+        if (email != null) {
             authLayout.visibility = View.INVISIBLE
-            showHome(email, ProviderType.valueOf(provider))
+            showHome(email)
 
         }
     }
@@ -178,7 +178,7 @@ class AuthActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credencial)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                showHome(it.result?.user?.email ?: "", ProviderType.GOOGLE)
+                                showHome(it.result?.user?.email ?: "" )
                             } else {
                                 ShowAlert()
                             }

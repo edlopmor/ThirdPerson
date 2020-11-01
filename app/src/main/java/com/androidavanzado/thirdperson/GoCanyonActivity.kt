@@ -1,24 +1,20 @@
 package com.androidavanzado.thirdperson
 
 import android.app.DatePickerDialog
-import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.format.Time
-import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.TimePicker
-import androidx.fragment.app.DialogFragment
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_go_canyon.*
 import java.util.*
 
- class  GoCanyonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener , TimePickerDialog.OnTimeSetListener{
+class  GoCanyonActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener , TimePickerDialog.OnTimeSetListener{
      private val database = FirebaseFirestore.getInstance()
      val calendar = Calendar.getInstance()
 
@@ -31,18 +27,29 @@ import java.util.*
 
         val bundle: Bundle? = intent.extras
         val email: String = bundle?.getString("email").toString()
+        var latLong :String? = bundle?.getString("LatLongitudAparcamiento").toString()
 
+
+        if (latLong=="null"){
+            textViewCoordenasGPS.text = "Coordenadas GPS"
+        }
+        else {
+            textViewCoordenasGPS.text = latLong
+        }
+
+        btnObtenerUbicacionVehiculo.setOnClickListener{
+            val intentToMapsActivity : Intent = Intent(this, MapsActivity::class.java).apply {
+            }
+            startActivity(intentToMapsActivity)
+        }
         buttonGuardarActividad.setOnClickListener {
                 //TODO CAPTURAR CAMPOS VACIOS.
             guardarActividad(email)
         }
-
         editTextDay.setOnClickListener {
-
             val day = calendar.get(Calendar.DAY_OF_MONTH)
             val month = calendar.get(Calendar.MONTH)
             val year = calendar.get(Calendar.YEAR)
-
             val datePickerDialog = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
                 editTextDay.setText(String.format("%d/%d/%d",day,month,year))
             },year,month,day)
@@ -56,19 +63,17 @@ import java.util.*
         }
 
     }
-
-    /** Metodo que realiza la escritura dentro de la base de datos, utilizando como clave principal el e-mail del usuario.
-     *
-     */
     private fun guardarActividad(email :String) {
+        //TODO CAMBIAR ESTE METODO PARA CREAR UNA NUEVA ACTIVIDAD Y ENVIAR UNA COPIA A LA BASE DE DATOS.
         database.collection("Actividad").document(email).set(
             hashMapOf("NOMBRE_ACTIVIDAD" to editTextActivityName.text.toString(),
                 "NUMERO_PERSONAS" to editTextNumberPeople.text.toString(),
                 "MATRICULA_COCHE" to editTextMatriculaCoche.text.toString(),
                 "EMAIL_CONTACTO" to editTextEmailContact.text.toString(),
                 "HORA_INICIO" to editTextTimeStart.text.toString(),
-                "HORA_FINAL" to editTextTimeFinish.text.toString()) )
-        //TODO OBTENER UBICACION.
+                "HORA_FINAL" to editTextTimeFinish.text.toString(),
+                "UBICACION" to textViewCoordenasGPS.text.toString()) )
+
     }
     private fun guardarHora(campoHora : EditText){
         var hora = calendar.get(Calendar.HOUR_OF_DAY)
@@ -94,6 +99,8 @@ import java.util.*
          TODO("Not yet implemented")
      }
  }
+
+
 
 
 

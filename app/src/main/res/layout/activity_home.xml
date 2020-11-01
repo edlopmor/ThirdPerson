@@ -40,13 +40,23 @@
 
     <Button
         android:id="@+id/buttonGoCanyon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="133dp"
+        android:layout_height="125dp"
         android:layout_marginStart="40dp"
         android:text="@string/txtCanyoning"
         app:layout_constraintBottom_toTopOf="@+id/btnCerrarSesion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
         app:layout_constraintVertical_bias="0.52" />
+
+    <Button
+        android:id="@+id/buttonEspeleologia"
+        android:layout_width="137dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="36dp"
+        android:text="Espeleologia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

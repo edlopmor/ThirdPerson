@@ -1,138 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context=".GoCanyonActivity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nombreActividad" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
-    <EditText
-        android:id="@+id/editTextActivityName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/nombreActividad"
-        android:inputType="textPersonName" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nombreActividad" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/numerodeparticipantes" />
+            <EditText
+                android:id="@+id/editTextActivityName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/nombreActividad"
+                android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/editTextNumberPeople"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Numero de personas que realizan la actividad"
-        android:inputType="number" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/numerodeparticipantes" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/idCar" />
+            <EditText
+                android:id="@+id/editTextNumberPeople"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Numero de personas que realizan la actividad"
+                android:inputType="number" />
 
-    <EditText
-        android:id="@+id/editTextMatriculaCoche"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Matricula del coche "
-        android:inputType="textPersonName" />
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/idCar" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/contactoEmergencia" />
+            <EditText
+                android:id="@+id/editTextMatriculaCoche"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Matricula del coche "
+                android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/editTextEmailContact"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contactoEmergencia" />
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Day" />
+            <EditText
+                android:id="@+id/editTextEmailContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/editTextDay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:focusable="false"
-        android:clickable="true"
-        android:maxLines="1"/>
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Day" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/starttime" />
+            <EditText
+                android:id="@+id/editTextDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="date"
+                android:maxLines="1" />
 
-    <EditText
-        android:id="@+id/editTextTimeStart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time"
-        android:focusable="false"
-        android:clickable="true"/>
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/starttime" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/finishTime" />
+            <EditText
+                android:id="@+id/editTextTimeStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="time" />
 
-    <EditText
-        android:id="@+id/editTextTimeFinish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time"
-        android:focusable="false"
-        android:clickable="true"/>
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finishTime" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/localizacionVehiculo" />
+            <EditText
+                android:id="@+id/editTextTimeFinish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:inputType="time" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapViewPosicionVehiculo"
-        android:layout_width="389dp"
-        android:layout_height="113dp" />
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/localizacionVehiculo" />
 
-    <Button
-        android:id="@+id/buttonGuardarActividad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btnStartActivity" />
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/textViewCoordenasGPS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CoordenadasGPS" />
+
+            <Button
+                android:id="@+id/btnObtenerUbicacionVehiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="@string/ubicacionVehiculo"
+                android:focusable="false"/>
+
+            <Button
+                android:id="@+id/buttonGuardarActividad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btnStartActivity" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
