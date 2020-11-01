@@ -30,14 +30,11 @@ class AuthActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Thread.sleep(1500)//QUITAR ESTO CUANDO FUNCIONE
-        setTheme(R.style.AppTheme)
-
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        //val analytics:FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        val analytics:FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         bundle.putString("Message", "Integracion de firebase Completa")
         analytics.logEvent("InitScreen", bundle)

@@ -49,6 +49,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
     implementation 'com.google.firebase:firebase-auth:19.4.0'
+    //Autentificacion mediante google
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
     implementation 'com.google.firebase:firebase-auth-ktx:19.3.2'
     //Base de datos noSql

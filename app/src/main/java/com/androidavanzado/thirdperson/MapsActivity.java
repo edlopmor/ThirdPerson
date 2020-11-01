@@ -67,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 myUbicacionAparcamiento = myMapa.addMarker((new MarkerOptions()
                         .position(latLng)
                         //Aumentar el tamaño de los aparcamientos.
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.lugaraparcamientocoche))
+                        //.icon(BitmapDescriptorFactory.fromResource(R.drawable.lugaraparcamientocoche))
                         .title(String.valueOf(latLng))));
 
                 new AlertDialog.Builder(MapsActivity.this)

@@ -9,13 +9,11 @@
     <string name="repeatPassword">Repita la contraseña</string>
     <string name="title_activity_home">HomeActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
     <!-- De esta forma subrayamos ese campo -->
     <string name="lostPassword"><u> Olvidaste la contraseña</u></string>
     <string name="lblIntroduzcasuEmail">Por favor introduzca su email</string>
@@ -38,5 +36,8 @@
     <string name="ubicacionVehiculo">"Ubicación del vehiculo "</string>
     <string name="title_activity_maps">Map</string>
     <string name="ubicacionvehiculo">Ubicacion del vehiculo en lat long</string>
+
+    <string name ="google_maps_key">AIzaSyDkD8fltF1iD37GH2lWk6o83ZTjWqnUQDw</string>
+
 
 </resources>
