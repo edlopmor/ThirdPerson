@@ -51,11 +51,13 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun Setup() {
+
         buttonRegistrar.setOnClickListener {
             showRegisterActivity()
             analytics.logEvent("BotonRegistrar", bundle)
         }
         buttonAcceder.setOnClickListener {
+            analytics.logEvent("BotonAcceder", bundle)
             if (editTextEmail.text.isNotEmpty() && editTextTextPassword.text.isNotEmpty()) {
                 Acceder()
 
@@ -68,9 +70,11 @@ class AuthActivity : AppCompatActivity() {
             }
         }
         textViewLostPassword.setOnClickListener {
+            analytics.logEvent("Perdidadecontraseña", bundle)
             showLostPasswordActivity()
         }
         buttonGoogle.setOnClickListener {
+            analytics.logEvent("BotonAccesoconGoogle", bundle)
             //Configuracion de acceso con cuenta google.
             val googleAuthConfiguracion =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -83,7 +87,6 @@ class AuthActivity : AppCompatActivity() {
             startActivityForResult(googleCliente.signInIntent, GOOGLE_SIG_IN)
         }
     }
-
     /**
      * Funcion que realiza la autentificacion a traves de los campos de texto mediante el usuario y la contraseña.
      */
