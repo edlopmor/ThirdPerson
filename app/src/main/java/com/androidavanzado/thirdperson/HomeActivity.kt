@@ -12,7 +12,9 @@ import java.security.Provider
 
 enum class ProviderType {
     BASIC,
-    GOOGLE
+    GOOGLE,
+    FACEBOOK
+
 }
 
 class HomeActivity : AppCompatActivity() {
@@ -70,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
             getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
         preferencias?.clear()
         preferencias?.apply()
+        
         FirebaseAuth.getInstance().signOut()
         onBackPressed()
     }

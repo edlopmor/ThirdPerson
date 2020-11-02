@@ -67,20 +67,22 @@
 
     <Button
         android:id="@+id/buttonGoogle"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:drawableStart="@drawable/common_google_signin_btn_icon_dark_normal"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@mipmap/google"
         android:text="@string/btnGoogle"
         app:layout_constraintEnd_toEndOf="@+id/buttonRegistrar"
         app:layout_constraintStart_toStartOf="@+id/buttonAcceder"
         app:layout_constraintTop_toBottomOf="@+id/textViewLostPassword" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonFacebook"
+        android:layout_width="248dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:drawableStart="@mipmap/facebookicon"
+
         android:text="@string/btnFacebook"
         app:layout_constraintEnd_toEndOf="@+id/buttonGoogle"
         app:layout_constraintStart_toStartOf="@+id/buttonGoogle"

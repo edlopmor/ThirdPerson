@@ -38,6 +38,9 @@
     <string name="ubicacionvehiculo">Ubicacion del vehiculo en lat long</string>
 
     <string name ="google_maps_key">AIzaSyDkD8fltF1iD37GH2lWk6o83ZTjWqnUQDw</string>
+    <string name="facebook_app_id">2415262288783416</string>
+    <string name="fb_login_protocol_scheme">fb2415262288783416</string>
+
 
 
 </resources>

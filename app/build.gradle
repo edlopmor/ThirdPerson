@@ -60,4 +60,7 @@ dependencies {
     //Cloud messaging.
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    //Authenticacion mediante facebook
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
 }

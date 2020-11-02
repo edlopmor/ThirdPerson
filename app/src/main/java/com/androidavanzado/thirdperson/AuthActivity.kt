@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -17,10 +19,14 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_auth.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.firebase.auth.FacebookAuthProvider
 
 class AuthActivity : AppCompatActivity() {
     private val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
     private val bundle = android.os.Bundle()
+    private val callbackManager = com.facebook.CallbackManager.Factory.create()
 
     private val GOOGLE_SIG_IN = 100
 
@@ -51,9 +57,39 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun Setup() {
+        buttonFacebook.setOnClickListener{
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
+            LoginManager.getInstance().registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult>{
+
+                override fun onSuccess(result: LoginResult?) {
+                   result?.let {
+                      val token = it.accessToken
+                      val credencial = FacebookAuthProvider.getCredential(token.token)
+                       FirebaseAuth.getInstance().signInWithCredential(credencial).addOnCompleteListener{
+                           if (it.isSuccessful){
+                               ShowHome(it.result?.user?.email?:"")
+                           }else{
+                               ShowAlert()
+                           }
+
+                       }
+
+                   }
+                }
+                override fun onCancel() {
+                    TODO("Not yet implemented")
+
+                }
+                override fun onError(error: FacebookException?) {
+                   ShowAlert()
+                }
+
+            })
+        }
 
         buttonRegistrar.setOnClickListener {
-            showRegisterActivity()
+            ShowRegisterActivity()
             analytics.logEvent("BotonRegistrar", bundle)
         }
         buttonAcceder.setOnClickListener {
@@ -71,7 +107,7 @@ class AuthActivity : AppCompatActivity() {
         }
         textViewLostPassword.setOnClickListener {
             analytics.logEvent("Perdidadecontraseña", bundle)
-            showLostPasswordActivity()
+            ShowLostPasswordActivity()
         }
         buttonGoogle.setOnClickListener {
             analytics.logEvent("BotonAccesoconGoogle", bundle)
@@ -97,7 +133,7 @@ class AuthActivity : AppCompatActivity() {
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Acceso exitoso", Toast.LENGTH_LONG).show()
-                    showHome(it.result?.user?.email ?: "")
+                    ShowHome(it.result?.user?.email ?: "")
 
                 } else {
                     ShowAlert()
@@ -110,7 +146,7 @@ class AuthActivity : AppCompatActivity() {
      * Funcion que navega hasta la pantalla de usuario y envia los datos.
      *
      */
-    private fun showHome(email: String ){
+    private fun ShowHome(email: String ){
 
         val homeIntent: Intent = Intent(this, HomeActivity::class.java).apply {
             putExtra("email", email)
@@ -134,7 +170,7 @@ class AuthActivity : AppCompatActivity() {
     /**
      * Metodo para ir a la actividdad de registro.
      */
-    private fun showRegisterActivity() {
+    private fun ShowRegisterActivity() {
         val registerActivity: Intent = Intent(this, RegisterActivity::class.java).apply {
         }
         startActivity(registerActivity)
@@ -144,7 +180,7 @@ class AuthActivity : AppCompatActivity() {
     /**
      * Metodo para ir a la actividad de recuperacion de contraseña .
      */
-    private fun showLostPasswordActivity() {
+    private fun ShowLostPasswordActivity() {
         val lostPasswordIntent: Intent = Intent(this, RetrievePasswordActivity::class.java).apply {
         }
         startActivity(lostPasswordIntent)
@@ -162,12 +198,13 @@ class AuthActivity : AppCompatActivity() {
 
         if (email != null) {
             authLayout.visibility = View.INVISIBLE
-            showHome(email)
+            ShowHome(email)
 
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode,resultCode,data)
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GOOGLE_SIG_IN) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -178,7 +215,7 @@ class AuthActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credencial)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                showHome(it.result?.user?.email ?: "" )
+                                ShowHome(it.result?.user?.email ?: "" )
                             } else {
                                 ShowAlert()
                             }
