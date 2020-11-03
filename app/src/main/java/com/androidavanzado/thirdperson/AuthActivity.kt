@@ -5,9 +5,12 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -17,10 +20,15 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_auth.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.iid.FirebaseInstanceId
 
 class AuthActivity : AppCompatActivity() {
     private val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
     private val bundle = android.os.Bundle()
+    private val callbackManager = com.facebook.CallbackManager.Factory.create()
 
     private val GOOGLE_SIG_IN = 100
 
@@ -30,14 +38,11 @@ class AuthActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Thread.sleep(1500)//QUITAR ESTO CUANDO FUNCIONE
-        setTheme(R.style.AppTheme)
-
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        //val analytics:FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        val analytics:FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         bundle.putString("Message", "Integracion de firebase Completa")
         analytics.logEvent("InitScreen", bundle)
@@ -46,6 +51,7 @@ class AuthActivity : AppCompatActivity() {
         //Setup
         Setup()
         ConprobarUsuarioSession()
+        ObtenerCodigoRegistro()
     }
 
     override fun onStart() {
@@ -54,26 +60,67 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun Setup() {
+        buttonFacebook.setOnClickListener{
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
+            LoginManager.getInstance().registerCallback(callbackManager,
+            object : FacebookCallback<LoginResult>{
+
+                override fun onSuccess(result: LoginResult?) {
+                   result?.let {
+                      val token = it.accessToken
+                      val credencial = FacebookAuthProvider.getCredential(token.token)
+                       FirebaseAuth.getInstance().signInWithCredential(credencial).addOnCompleteListener{
+                           if (it.isSuccessful){
+                               ShowHome(it.result?.user?.email?:"")
+                           }else{
+                               ShowAlert()
+                           }
+
+                       }
+
+                   }
+                }
+                override fun onCancel() {
+                    TODO("Not yet implemented")
+
+                }
+                override fun onError(error: FacebookException?) {
+                   ShowAlert()
+                }
+
+            })
+        }
+
         buttonRegistrar.setOnClickListener {
-            showRegisterActivity()
+            ShowRegisterActivity()
             analytics.logEvent("BotonRegistrar", bundle)
         }
         buttonAcceder.setOnClickListener {
-            if (editTextEmail.text.isNotEmpty() && editTextTextPassword.text.isNotEmpty()) {
-                Acceder()
+           // var email : String = editTextEmail.text.toString()
+           // var password :String = editTextTextPassword.text.toString()
+            analytics.logEvent("BotonAcceder", bundle)
+           if (editTextEmail.text.isNotEmpty() && editTextTextPassword.text.isNotEmpty()) {
+               var email : String = editTextEmail.text.toString()
+               var password :String = editTextTextPassword.text.toString()
+                    Acceder(email,password)
 
             } else {
                 if (editTextEmail.text.isEmpty())
                     Toast.makeText(this, "Rellene el campo de email", Toast.LENGTH_LONG).show()
+                if (comprobarEmail(editTextEmail.text.toString()))
+                    Toast.makeText(this,"El campo email no es correcto",Toast.LENGTH_LONG).show()
                 if (editTextTextPassword.text.isEmpty())
                     Toast.makeText(this, "Por favor rellene el campo password", Toast.LENGTH_LONG)
                         .show()
+
             }
         }
         textViewLostPassword.setOnClickListener {
-            showLostPasswordActivity()
+            analytics.logEvent("Perdidadecontraseña", bundle)
+            ShowLostPasswordActivity()
         }
         buttonGoogle.setOnClickListener {
+            analytics.logEvent("BotonAccesoconGoogle", bundle)
             //Configuracion de acceso con cuenta google.
             val googleAuthConfiguracion =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -86,21 +133,22 @@ class AuthActivity : AppCompatActivity() {
             startActivityForResult(googleCliente.signInIntent, GOOGLE_SIG_IN)
         }
     }
-
     /**
      * Funcion que realiza la autentificacion a traves de los campos de texto mediante el usuario y la contraseña.
      */
-    private fun Acceder() {
+    private fun Acceder(email: String, password :String) {
         FirebaseAuth.getInstance()
             .signInWithEmailAndPassword(
-                editTextEmail.text.toString(), editTextTextPassword.text.toString()
+               email,password
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Acceso exitoso", Toast.LENGTH_LONG).show()
-                    showHome(it.result?.user?.email ?: "")
-
+                    ShowHome(it.result?.user?.email ?: "")
                 } else {
-                    ShowAlert()
+                    if (!comprobarEmail(email)){
+                        Toast.makeText(this,"El email es incorrecto",Toast.LENGTH_LONG).show()
+                    }
+                    Toast.makeText(this,"Revise la contraseña",Toast.LENGTH_LONG).show()
                 }
 
             }
@@ -110,7 +158,7 @@ class AuthActivity : AppCompatActivity() {
      * Funcion que navega hasta la pantalla de usuario y envia los datos.
      *
      */
-    private fun showHome(email: String ){
+    private fun ShowHome(email: String ){
 
         val homeIntent: Intent = Intent(this, HomeActivity::class.java).apply {
             putExtra("email", email)
@@ -134,7 +182,7 @@ class AuthActivity : AppCompatActivity() {
     /**
      * Metodo para ir a la actividdad de registro.
      */
-    private fun showRegisterActivity() {
+    private fun ShowRegisterActivity() {
         val registerActivity: Intent = Intent(this, RegisterActivity::class.java).apply {
         }
         startActivity(registerActivity)
@@ -144,7 +192,7 @@ class AuthActivity : AppCompatActivity() {
     /**
      * Metodo para ir a la actividad de recuperacion de contraseña .
      */
-    private fun showLostPasswordActivity() {
+    private fun ShowLostPasswordActivity() {
         val lostPasswordIntent: Intent = Intent(this, RetrievePasswordActivity::class.java).apply {
         }
         startActivity(lostPasswordIntent)
@@ -162,12 +210,29 @@ class AuthActivity : AppCompatActivity() {
 
         if (email != null) {
             authLayout.visibility = View.INVISIBLE
-            showHome(email)
+            ShowHome(email)
 
         }
     }
+    private fun ObtenerCodigoRegistro (){
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener{
+            it.result?.token.let{
+                println("Este es el token de registro : ${it}")
+            }
+        }
+    }
+    //Funcion que compara el campo email con una expresion regular para comprobar si es correcto.
+    private fun  comprobarEmail (emailAcomprobar :String ): Boolean {
+        var emailCorrecto : Boolean = false
+        val emailPattern ="[a-zA-Z0-9._-]+@[a-z]+\\\\.+[a-z]+"
+        if (emailAcomprobar.trim(){it <= ' '}.matches(emailPattern.toRegex())){
+            emailCorrecto = true
+        }
+        return emailCorrecto
 
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode,resultCode,data)
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GOOGLE_SIG_IN) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -178,7 +243,7 @@ class AuthActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credencial)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                showHome(it.result?.user?.email ?: "" )
+                                ShowHome(it.result?.user?.email ?: "" )
                             } else {
                                 ShowAlert()
                             }

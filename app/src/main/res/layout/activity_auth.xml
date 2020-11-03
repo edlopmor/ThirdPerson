@@ -9,15 +9,16 @@
 
     <EditText
         android:id="@+id/editTextEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="225dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="@string/hint_Email"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        android:inputType="text|textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -38,21 +39,11 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="80dp"
         android:text="@string/buttonSign"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/buttonRegistrar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <Button
         android:id="@+id/buttonRegistrar"
@@ -60,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/btRegister"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
@@ -77,20 +69,22 @@
 
     <Button
         android:id="@+id/buttonGoogle"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:drawableStart="@drawable/common_google_signin_btn_icon_dark_normal"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@mipmap/google"
         android:text="@string/btnGoogle"
         app:layout_constraintEnd_toEndOf="@+id/buttonRegistrar"
         app:layout_constraintStart_toStartOf="@+id/buttonAcceder"
         app:layout_constraintTop_toBottomOf="@+id/textViewLostPassword" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonFacebook"
+        android:layout_width="248dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:drawableStart="@mipmap/facebookicon"
+
         android:text="@string/btnFacebook"
         app:layout_constraintEnd_toEndOf="@+id/buttonGoogle"
         app:layout_constraintStart_toStartOf="@+id/buttonGoogle"
