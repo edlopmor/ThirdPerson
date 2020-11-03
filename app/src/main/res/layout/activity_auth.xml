@@ -14,7 +14,7 @@
         android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="@string/hint_Email"
-        android:inputType="textPersonName"
+        android:inputType="text|textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +39,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="80dp"
         android:text="@string/buttonSign"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/buttonRegistrar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
@@ -50,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/btRegister"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 

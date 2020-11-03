@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_auth.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.iid.FirebaseInstanceId
 
 class AuthActivity : AppCompatActivity() {
     private val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -49,6 +51,7 @@ class AuthActivity : AppCompatActivity() {
         //Setup
         Setup()
         ConprobarUsuarioSession()
+        ObtenerCodigoRegistro()
     }
 
     override fun onStart() {
@@ -93,16 +96,23 @@ class AuthActivity : AppCompatActivity() {
             analytics.logEvent("BotonRegistrar", bundle)
         }
         buttonAcceder.setOnClickListener {
+           // var email : String = editTextEmail.text.toString()
+           // var password :String = editTextTextPassword.text.toString()
             analytics.logEvent("BotonAcceder", bundle)
-            if (editTextEmail.text.isNotEmpty() && editTextTextPassword.text.isNotEmpty()) {
-                Acceder()
+           if (editTextEmail.text.isNotEmpty() && editTextTextPassword.text.isNotEmpty()) {
+               var email : String = editTextEmail.text.toString()
+               var password :String = editTextTextPassword.text.toString()
+                    Acceder(email,password)
 
             } else {
                 if (editTextEmail.text.isEmpty())
                     Toast.makeText(this, "Rellene el campo de email", Toast.LENGTH_LONG).show()
+                if (comprobarEmail(editTextEmail.text.toString()))
+                    Toast.makeText(this,"El campo email no es correcto",Toast.LENGTH_LONG).show()
                 if (editTextTextPassword.text.isEmpty())
                     Toast.makeText(this, "Por favor rellene el campo password", Toast.LENGTH_LONG)
                         .show()
+
             }
         }
         textViewLostPassword.setOnClickListener {
@@ -126,17 +136,19 @@ class AuthActivity : AppCompatActivity() {
     /**
      * Funcion que realiza la autentificacion a traves de los campos de texto mediante el usuario y la contraseña.
      */
-    private fun Acceder() {
+    private fun Acceder(email: String, password :String) {
         FirebaseAuth.getInstance()
             .signInWithEmailAndPassword(
-                editTextEmail.text.toString(), editTextTextPassword.text.toString()
+               email,password
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Acceso exitoso", Toast.LENGTH_LONG).show()
                     ShowHome(it.result?.user?.email ?: "")
-
                 } else {
-                    ShowAlert()
+                    if (!comprobarEmail(email)){
+                        Toast.makeText(this,"El email es incorrecto",Toast.LENGTH_LONG).show()
+                    }
+                    Toast.makeText(this,"Revise la contraseña",Toast.LENGTH_LONG).show()
                 }
 
             }
@@ -202,7 +214,23 @@ class AuthActivity : AppCompatActivity() {
 
         }
     }
+    private fun ObtenerCodigoRegistro (){
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener{
+            it.result?.token.let{
+                println("Este es el token de registro : ${it}")
+            }
+        }
+    }
+    //Funcion que compara el campo email con una expresion regular para comprobar si es correcto.
+    private fun  comprobarEmail (emailAcomprobar :String ): Boolean {
+        var emailCorrecto : Boolean = false
+        val emailPattern ="[a-zA-Z0-9._-]+@[a-z]+\\\\.+[a-z]+"
+        if (emailAcomprobar.trim(){it <= ' '}.matches(emailPattern.toRegex())){
+            emailCorrecto = true
+        }
+        return emailCorrecto
 
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode,resultCode,data)
         super.onActivityResult(requestCode, resultCode, data)
