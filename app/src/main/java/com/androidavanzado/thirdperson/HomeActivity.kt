@@ -18,6 +18,7 @@ enum class ProviderType {
 }
 
 class HomeActivity : AppCompatActivity() {
+
     companion object {
         var email: String = "";
     }
@@ -47,6 +48,7 @@ class HomeActivity : AppCompatActivity() {
             val goCanyonIntent : Intent = Intent(this, GoCanyonActivity::class.java).apply {
                 putExtra("email", email)
 
+
             }
             startActivity(goCanyonIntent)
         }
@@ -58,7 +60,6 @@ class HomeActivity : AppCompatActivity() {
         textViewEmail.text = email
         textViewProvider.text = provider
 
-        //Programar el botton de log-out.
 
 
     }

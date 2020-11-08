@@ -22,11 +22,13 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_auth.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.ktx.Firebase
 
 class AuthActivity : AppCompatActivity() {
-    private val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private val bundle = android.os.Bundle()
     private val callbackManager = com.facebook.CallbackManager.Factory.create()
 
@@ -38,16 +40,9 @@ class AuthActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-
-        val analytics:FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-
-        bundle.putString("Message", "Integracion de firebase Completa")
-        analytics.logEvent("InitScreen", bundle)
-
-
+       firebaseAnalytics = Firebase.analytics
         //Setup
         Setup()
         ConprobarUsuarioSession()
@@ -93,12 +88,12 @@ class AuthActivity : AppCompatActivity() {
 
         buttonRegistrar.setOnClickListener {
             ShowRegisterActivity()
-            analytics.logEvent("BotonRegistrar", bundle)
+            //analytics.logEvent("BotonRegistrar", bundle)
         }
         buttonAcceder.setOnClickListener {
            // var email : String = editTextEmail.text.toString()
            // var password :String = editTextTextPassword.text.toString()
-            analytics.logEvent("BotonAcceder", bundle)
+            //analytics.logEvent("BotonAcceder", bundle)
            if (editTextEmail.text.isNotEmpty() && editTextTextPassword.text.isNotEmpty()) {
                var email : String = editTextEmail.text.toString()
                var password :String = editTextTextPassword.text.toString()
@@ -116,11 +111,11 @@ class AuthActivity : AppCompatActivity() {
             }
         }
         textViewLostPassword.setOnClickListener {
-            analytics.logEvent("Perdidadecontraseña", bundle)
+            //analytics.logEvent("Perdidadecontraseña", bundle)
             ShowLostPasswordActivity()
         }
         buttonGoogle.setOnClickListener {
-            analytics.logEvent("BotonAccesoconGoogle", bundle)
+            //analytics.logEvent("BotonAccesoconGoogle", bundle)
             //Configuracion de acceso con cuenta google.
             val googleAuthConfiguracion =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -217,7 +212,7 @@ class AuthActivity : AppCompatActivity() {
     private fun ObtenerCodigoRegistro (){
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener{
             it.result?.token.let{
-                println("Este es el token de registro : ${it}")
+                println("Este es el token de registro dese AutActivity: ${it}")
             }
         }
     }

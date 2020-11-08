@@ -18,6 +18,26 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
 
+            <Button
+                android:id="@+id/btnObtenerUbicacionVehiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/ubicacionVehiculo" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/localizacionVehiculo" />
+
+            <TextView
+                android:id="@+id/textViewCoordenasGPS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CoordenadasGPS" />
+
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
@@ -118,26 +138,6 @@
                 android:ems="10"
                 android:focusable="false"
                 android:inputType="time" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/localizacionVehiculo" />
-
-            <TextView
-                android:id="@+id/textViewCoordenasGPS"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CoordenadasGPS" />
-
-            <Button
-                android:id="@+id/btnObtenerUbicacionVehiculo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:text="@string/ubicacionVehiculo"
-                android:focusable="false"/>
 
             <Button
                 android:id="@+id/buttonGuardarActividad"
