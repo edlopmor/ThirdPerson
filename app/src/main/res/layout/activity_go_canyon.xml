@@ -18,6 +18,26 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
 
+            <Button
+                android:id="@+id/btnObtenerUbicacionVehiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:text="@string/ubicacionVehiculo" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/localizacionVehiculo" />
+
+            <TextView
+                android:id="@+id/textViewCoordenasGPS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CoordenadasGPS" />
+
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
@@ -47,6 +67,20 @@
                 android:inputType="number" />
 
             <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contactoEmergencia" />
+
+            <EditText
+                android:id="@+id/editTextEmailContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+
+            <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,19 +95,6 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contactoEmergencia" />
-
-            <EditText
-                android:id="@+id/editTextEmailContact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-
-            <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,10 +104,12 @@
                 android:id="@+id/editTextDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:clickable="true"
                 android:ems="10"
+
                 android:focusable="false"
-                android:inputType="date"
+                android:inputType="text"
                 android:maxLines="1" />
 
             <TextView
@@ -118,26 +141,6 @@
                 android:ems="10"
                 android:focusable="false"
                 android:inputType="time" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/localizacionVehiculo" />
-
-            <TextView
-                android:id="@+id/textViewCoordenasGPS"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CoordenadasGPS" />
-
-            <Button
-                android:id="@+id/btnObtenerUbicacionVehiculo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:text="@string/ubicacionVehiculo"
-                android:focusable="false"/>
 
             <Button
                 android:id="@+id/buttonGuardarActividad"

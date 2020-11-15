@@ -37,10 +37,13 @@
     <string name="title_activity_maps">Map</string>
     <string name="ubicacionvehiculo">Ubicacion del vehiculo en lat long</string>
 
-    <string name ="google_maps_key">AIzaSyDkD8fltF1iD37GH2lWk6o83ZTjWqnUQDw</string>
+    <string name="google_maps_key">AIzaSyDkUrLFJvYYTUR82QVTzA_TO4wAK2xwr9g</string>
     <string name="facebook_app_id">2415262288783416</string>
     <string name="fb_login_protocol_scheme">fb2415262288783416</string>
 
+
+    <!-- String relacionadas con avisos al usuario-->
+    <string name="errorAutenticar">Error al crear el usuario</string>
 
 
 </resources>

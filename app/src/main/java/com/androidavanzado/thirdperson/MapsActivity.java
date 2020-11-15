@@ -27,6 +27,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap myMapa;
     Marker myUbicacionAparcamiento ;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +36,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
-
     }
 
     @Override
@@ -72,7 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 new AlertDialog.Builder(MapsActivity.this)
                         .setTitle("Selecciona esta ubicacion")
-                        .setMessage("Desea ques esta sea la posicion de su vehiculo")
+                        .setMessage("Desea que esta sea la posicion de su vehiculo")
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -80,6 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Intent intentToGoCanyonActivity = new Intent(MapsActivity.this, GoCanyonActivity.class);
                                         String latitudLongitudEnviar = (latLng.toString());
                                         intentToGoCanyonActivity.putExtra("LatLongitudAparcamiento",latitudLongitudEnviar);
+
                                         startActivity(intentToGoCanyonActivity);
 
                                     }
