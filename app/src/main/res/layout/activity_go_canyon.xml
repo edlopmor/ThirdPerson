@@ -67,6 +67,20 @@
                 android:inputType="number" />
 
             <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contactoEmergencia" />
+
+            <EditText
+                android:id="@+id/editTextEmailContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textEmailAddress" />
+
+            <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,19 +95,6 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contactoEmergencia" />
-
-            <EditText
-                android:id="@+id/editTextEmailContact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-
-            <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,10 +104,12 @@
                 android:id="@+id/editTextDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:clickable="true"
                 android:ems="10"
+
                 android:focusable="false"
-                android:inputType="date"
+                android:inputType="text"
                 android:maxLines="1" />
 
             <TextView

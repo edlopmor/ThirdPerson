@@ -42,4 +42,8 @@
     <string name="fb_login_protocol_scheme">fb2415262288783416</string>
 
 
+    <!-- String relacionadas con avisos al usuario-->
+    <string name="errorAutenticar">Error al crear el usuario</string>
+
+
 </resources>

@@ -7,10 +7,12 @@ import com.google.firebase.messaging.RemoteMessage
 import com.google.firebase.messaging.ktx.remoteMessage
 
 class MyFireBaseMessagingService : FirebaseMessagingService() {
+
+
+    //Recibir notificacion en primer plano .
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Looper.prepare()
-
-        Handler().post(){
+        java.util.concurrent.Executor {
             Toast.makeText(baseContext, remoteMessage.notification?.title,Toast.LENGTH_LONG).show()
         }
         Looper.loop()

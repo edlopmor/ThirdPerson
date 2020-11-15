@@ -70,7 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 new AlertDialog.Builder(MapsActivity.this)
                         .setTitle("Selecciona esta ubicacion")
-                        .setMessage("Desea ques esta sea la posicion de su vehiculo")
+                        .setMessage("Desea que esta sea la posicion de su vehiculo")
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
